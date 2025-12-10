@@ -1001,7 +1001,7 @@ require('lazy').setup({
 
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -1011,8 +1011,9 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        checkmake = {},
         ruff = {},
+        gdtoolkit = {},
 
         pyright = {
           settings = {
@@ -1129,6 +1130,7 @@ require('lazy').setup({
             return { 'isort', 'black' }
           end
         end,
+        gdscript = { 'gdformat' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -1172,6 +1174,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-buffer',
     },
     config = function()
       -- See `:help cmp`
@@ -1249,6 +1252,14 @@ require('lazy').setup({
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'nvim_lsp_signature_help' },
+          {
+            name = 'buffer',
+            option = {
+              get_bufnrs = function()
+                return vim.api.nvim_list_bufs()
+              end,
+            },
+          },
         },
       }
     end,
